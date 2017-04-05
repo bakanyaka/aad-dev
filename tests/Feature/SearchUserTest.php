@@ -2,55 +2,30 @@
 
 namespace Tests\Feature;
 
-use Adldap\Models\User;
-use Adldap\Query\Builder;
-use Adldap\Schemas\ActiveDirectory;
-use Faker\Factory;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Adldap\Laravel\Facades\Adldap;
+use Tests\AdldapTestCase;
 
-class SearchUserTest extends TestCase
+class SearchUserTest extends AdldapTestCase
 {
-
-    protected $faker;
-    protected $mockedBuilder;
-
-    public function setUp()
-    {
-
-        parent::setUp();
-        $this->faker = Factory::create('ru_RU');
-        $this->mockedBuilder = $this->mock(Builder::class);
-        $this->mockedBuilder->shouldReceive('getSchema')->andReturn(new ActiveDirectory);
-    }
-
-    public function make_fake_user($count = 1)
-    {
-        $users = array();
-        for ($i = 0; $i < $count; $i++) {
-            $firstName = $this->faker->firstName('male');
-            $lastName = $this->faker->lastName('male');
-            $middleName = $this->faker->middleNameMale;
-            $users[] = (new User([], $this->mockedBuilder))->setRawAttributes([
-                'name' => "{$lastName} {$firstName} {$middleName}",
-                'givenName' => $firstName,
-                'middleName' => $middleName,
-                'sn' => $lastName,
-                'displayname' => "{$lastName} {$firstName} {$middleName}",
-                'samaccountname' => $this->faker->bothify('???#####'),
-                'department' => "{$this->faker->randomNumber($nbDigits = 3)} {$this->faker->sentence($nbWords = 6, $variableNbWords = true)}",
-                'useraccountcontrol' => 512
-            ]);
-        }
-        return $users;
-    }
-
     /** @test */
     public function it_finds_user_by_username_and_returns_json()
     {
-        $user = $this->make_fake_user();
-        dd($user);
+        $user = ($this->make_fake_users())[0];
+        Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
+        $this->mockedSearch->shouldReceive('users')->once()->andReturn($this->mockedBuilder);
+        $this->mockedBuilder->shouldReceive('findBy')->once()->with('samaccountname', $user->samaccountname)->andReturn($user);
+        $response = $this->get("/users?q={$user->samaccountname}");
+        $response->assertStatus(200)->assertJsonFragment([
+            'account' => $user->samaccountname,
+            'firstName' => $user->givenName,
+            'lastName' => $user->sn,
+            'middleName' => $user->middleName,
+            'mail' => $user->mail,
+            'externalMail' => $user->homePhone,
+            'internalPhone' => $user->telephoneNumber,
+            'cityPhone' => $user->pager,
+            'department' => $user->department,
+            'enabled' => $user->isEnabled(),
+        ]);
     }
 }
