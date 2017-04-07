@@ -34,19 +34,22 @@ class AdldapTestCase extends TestCase
             $middleName = $this->faker->middleNameMale;
             $account = $this->faker->bothify('???#####');
             $users[] = (new User([], $this->mockedBuilder))->setRawAttributes([
-                'name' => "{$lastName} {$firstName} {$middleName}",
-                'givenName' => $firstName,
-                'middleName' => $middleName,
-                'sn' => $lastName,
-                'displayname' => "{$lastName} {$firstName} {$middleName}",
-                'samaccountname' => $account,
-                'mail' => "{$account}@arsenal.plm",
-                'homePhone' => $this->faker->email,
-                'pager' => $this->faker->numerify('292-##-##'),
-                'telephoneNumber' => $this->faker->numerify('##-##'),
-                'department' => "{$this->faker->randomNumber($nbDigits = 3)} {$this->faker->sentence($nbWords = 6, $variableNbWords = true)}",
-                'lastLogon' => Utilities::convertUnixTimeToWindowsTime($this->faker->unixTime()),
-                'useraccountcontrol' => 512
+                'name' => ["{$lastName} {$firstName} {$middleName}"],
+                'givenname' => [$firstName],
+                'middlename' => [$middleName],
+                'sn' => [$lastName],
+                'displayname' => ["{$lastName} {$firstName} {$middleName}"],
+                'samaccountname' => [$account],
+                'mail' => ["{$account}@arsenal.plm"],
+                'homePhone' => [$this->faker->email],
+                'pager' => [$this->faker->numerify('292-4#-##')],
+                'telephonenumber' => [$this->faker->numerify('##-##')],
+                'mobile' => [$this->faker->numerify('+7(###)###-##-##')],
+                'department' => ["{$this->faker->randomNumber($nbDigits = 3)} {$this->faker->sentence($nbWords = 6, $variableNbWords = true)}"],
+                'title' => [$this->faker->jobTitle],
+                'physicaldeliveryofficename' => [$this->faker->numerify('Здание ##, Этаж #, Комната ###')],
+                'lastLogon' => [Utilities::convertUnixTimeToWindowsTime($this->faker->unixTime())],
+                'useraccountcontrol' => [512]
             ]);
         }
         return $users;

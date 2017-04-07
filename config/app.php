@@ -168,6 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Adldap\Laravel\AdldapServiceProvider::class,
+        Spatie\Fractal\FractalServiceProvider::class,
 
         /*
          * Application Service Providers...
