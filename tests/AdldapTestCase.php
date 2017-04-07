@@ -41,7 +41,7 @@ class AdldapTestCase extends TestCase
                 'displayname' => ["{$lastName} {$firstName} {$middleName}"],
                 'samaccountname' => [$account],
                 'mail' => ["{$account}@arsenal.plm"],
-                'homePhone' => [$this->faker->email],
+                'homephone' => [$this->faker->email],
                 'pager' => [$this->faker->numerify('292-4#-##')],
                 'telephonenumber' => [$this->faker->numerify('##-##')],
                 'mobile' => [$this->faker->numerify('+7(###)###-##-##')],

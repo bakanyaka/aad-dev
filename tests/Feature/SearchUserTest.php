@@ -18,12 +18,12 @@ class SearchUserTest extends AdldapTestCase
         $response = $this->get("/api/users/search?q={$user->samaccountname[0]}");
         $response->assertStatus(200)->assertJsonFragment([
             'account' => $user->samaccountname[0],
-            'firstName' => $user->givenName[0],
+            'firstName' => $user->givenname[0],
             'lastName' => $user->sn[0],
-            'middleName' => $user->middleName[0],
+            'middleName' => $user->middlename[0],
             'mail' => $user->mail[0],
-            'externalMail' => $user->homePhone[0],
-            'internalPhone' => $user->telephoneNumber[0],
+            'externalMail' => $user->homephone[0],
+            'localPhone' => $user->telephonenumber[0],
             'cityPhone' => $user->pager[0],
             'department' => $user->department[0],
             'enabled' => $user->isEnabled(),

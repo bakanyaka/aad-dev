@@ -35,7 +35,11 @@ class AdUserRepository implements UserRepositoryInterface
         $user->localPhone = $adUser->getTelephoneNumber();
         $user->cityPhone = $adUser->getFirstAttribute('pager');
         $user->mobilePhone = $adUser->getFirstAttribute('mobile');
+        $user->mail = $adUser->getFirstAttribute('mail');
+        $user->externalMail = $adUser->getFirstAttribute('homephone');
         $user->office = $adUser->getPhysicalDeliveryOfficeName();
+        $user->department = $adUser->getDepartment();
+        $user->enabled = $adUser->isEnabled();
         return $user;
     }
 }

@@ -16,5 +16,9 @@ class User
     public $localPhone;
     public $cityPhone;
     public $mobilePhone;
+    public $mail;
+    public $externalMail;
     public $office;
+    public $department;
+    public $enabled;
 }
