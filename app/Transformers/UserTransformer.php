@@ -22,9 +22,12 @@ class UserTransformer extends TransformerAbstract
             'firstName' => $user->firstName,
             'lastName' => $user->lastName,
             'middleName' => $user->middleName,
+            'title' => $user->title,
             'cityPhone' => $user->cityPhone,
             'localPhone' => $user->localPhone,
+            'mobilePhone' => $user->mobilePhone,
             'department' => $user->department,
+            'office' => $user->office,
             'mail' => $user->mail,
             'externalMail' => $user->externalMail,
             'enabled' => $user->enabled
