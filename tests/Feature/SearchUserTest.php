@@ -11,14 +11,14 @@ class SearchUserTest extends AdldapTestCase
     public function it_finds_user_by_username_and_returns_json()
     {
         $this->disableExceptionHandling();
-        $user = ($this->make_fake_users())[0];
+        $user = $this->make_fake_user();
         Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
         $this->mockedSearch->shouldReceive('users')->once()->andReturn($this->mockedBuilder);
         $this->mockedBuilder->shouldReceive('findBy')->once()->with('samaccountname', $user->samaccountname[0])->andReturn($user);
         $response = $this->get("/api/users/search?q={$user->samaccountname[0]}");
         $response->assertStatus(200)->assertJsonFragment([
             'account' => $user->samaccountname[0],
-            'name' => $user->name[0],
+            'name' => $user->getName(),
             'displayName' => $user->displayname[0],
             'firstName' => $user->givenname[0],
             'lastName' => $user->sn[0],
@@ -33,5 +33,47 @@ class SearchUserTest extends AdldapTestCase
             'office' => $user->physicaldeliveryofficename[0],
             'enabled' => $user->isEnabled(),
         ]);
+    }
+
+    /** @test */
+    public function it_finds_user_by_partial_name()
+    {
+        $this->disableExceptionHandling();
+        $user = $this->make_fake_user();
+        Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
+        $this->mockedSearch->shouldReceive('users')->andReturn($this->mockedBuilder);
+        $this->mockedBuilder->shouldReceive('whereContains')->with('name', $user->sn[0])->andReturnSelf();
+        $this->mockedBuilder->shouldReceive('where')->with('name', 'contains', $user->sn[0])->andReturnSelf();
+        $this->mockedBuilder->shouldReceive('get')->andReturn(collect([$user]));
+        $response = $this->get("/api/users/search?q={$user->sn[0]}");
+        $response->assertStatus(200)->assertJsonFragment(['account' => $user->samaccountname[0]]);
+    }
+
+    /** @test */
+    public function it_finds_user_by_computer_name()
+    {
+        $this->disableExceptionHandling();
+        $user = $this->make_fake_user();
+        $computer = $this->make_fake_computer(["description" => "{$user->samaccountname[0]} @ {$this->faker->dateTimeThisYear()->format('d.m.Y H:i:s')}" ]);
+        Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
+        $this->mockedSearch->shouldReceive("computers->find")->with($computer->getName())->andReturn($computer);
+        $this->mockedSearch->shouldReceive("users->findBy")->once()->with('samaccountname', $user->samaccountname[0]);
+        $response = $this->get("/api/users/search?q={$computer->getName()}");
+        $response->assertStatus(200)->assertJsonFragment(['account' => $user->samaccountname[0]]);
+    }
+
+    /** @test */
+    public function it_returns_json_with_empty_data_array_when_no_user_is_found()
+    {
+        $this->mockedSearch->shouldReceive('users')->andReturn($this->mockedBuilder);
+        $this->mockedBuilder->shouldReceive('findBy')->andReturn(null);
+        $this->mockedBuilder->shouldReceive('whereContains')->andReturnSelf();
+        $this->mockedBuilder->shouldReceive('where')->andReturnSelf();
+        $this->mockedBuilder->shouldReceive('get')->andReturn(collect());
+
+        $response = $this->get("/api/users/search?q=xxx99999");
+        $response->assertStatus(200)->assertExactJson(["data" => []]);
+        $response = $this->get("/api/users/search?q=какаятофамилия");
+        $response->assertStatus(200)->assertExactJson(["data" => []]);
     }
 }

@@ -14,7 +14,13 @@ class AdUserRepository implements UserRepositoryInterface
     public function getByAccount($account)
     {
         $adUser = Adldap::search()->users()->findBy('samaccountname', $account);
-        return $this->mapAdUserToUser($adUser);
+        return $adUser ? $this->mapAdUserToUser($adUser) : null;
+    }
+
+    public function findByName($name)
+    {
+        $adUsers = Adldap::search()->users()->whereContains('name', $name)->get();
+        return $adUsers->map([$this, 'mapAdUserToUser']);
     }
 
     /**

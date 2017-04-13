@@ -27,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
         $this->app->singleton('App\Repositories\UserRepositoryInterface', 'App\Repositories\Ad\AdUserRepository');
+        $this->app->singleton('App\Repositories\ComputerRepositoryInterface', 'App\Repositories\Ad\AdComputerRepository');
     }
 }
