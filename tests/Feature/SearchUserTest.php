@@ -12,7 +12,6 @@ class SearchUserTest extends AdldapTestCase
     {
         $this->disableExceptionHandling();
         $user = $this->make_fake_user();
-        Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
         $this->mockedSearch->shouldReceive('users')->once()->andReturn($this->mockedBuilder);
         $this->mockedBuilder->shouldReceive('findBy')->once()->with('samaccountname', $user->samaccountname[0])->andReturn($user);
         $response = $this->get("/api/users/search?q={$user->samaccountname[0]}");
@@ -40,7 +39,6 @@ class SearchUserTest extends AdldapTestCase
     {
         $this->disableExceptionHandling();
         $user = $this->make_fake_user();
-        Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
         $this->mockedSearch->shouldReceive('users')->andReturn($this->mockedBuilder);
         $this->mockedBuilder->shouldReceive('whereContains')->with('name', $user->sn[0])->andReturnSelf();
         $this->mockedBuilder->shouldReceive('where')->with('name', 'contains', $user->sn[0])->andReturnSelf();
@@ -55,7 +53,6 @@ class SearchUserTest extends AdldapTestCase
         $this->disableExceptionHandling();
         $user = $this->make_fake_user();
         $computer = $this->make_fake_computer(["description" => "{$user->samaccountname[0]} @ {$this->faker->dateTimeThisYear()->format('d.m.Y H:i:s')}" ]);
-        Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
         $this->mockedSearch->shouldReceive("computers->find")->with($computer->getName())->andReturn($computer);
         $this->mockedSearch->shouldReceive("users->findBy")->once()->with('samaccountname', $user->samaccountname[0])->andReturn($user);
         $response = $this->get("/api/users/search?q={$computer->getName()}");

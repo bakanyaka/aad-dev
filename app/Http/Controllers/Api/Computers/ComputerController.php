@@ -26,6 +26,7 @@ class ComputerController extends Controller
     public function show($computer)
     {
         $searchResult = $this->search->findComputer($computer);
+        if (!$searchResult) abort(404);
         return fractal()->item($searchResult)->transformWith(new ComputerTransformer)->toArray();
     }
 }

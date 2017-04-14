@@ -64,4 +64,9 @@ class SearchService
     {
         return $this->computers->getByName($computerName);
     }
+
+    public function findComputerByUser($username)
+    {
+        return $this->computers->getByUsername($username);
+    }
 }

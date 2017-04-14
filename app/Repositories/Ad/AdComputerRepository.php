@@ -17,6 +17,11 @@ class AdComputerRepository implements ComputerRepositoryInterface
         return $adComputer ? $this->mapAdComputerToComputer($adComputer) : null;
     }
 
+    public function getByUsername($username)
+    {
+        return Adldap::search()->computers()->whereStartsWith('description', $username)->get()->map([$this, 'mapAdComputerToComputer']);
+    }
+
     public function mapAdComputerToComputer(\Adldap\Models\Computer $adComputer)
     {
         $computer = new Computer();

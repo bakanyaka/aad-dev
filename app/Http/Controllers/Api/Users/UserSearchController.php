@@ -6,7 +6,7 @@ use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class UserSearchController extends Controller
 {
     protected $search;
 

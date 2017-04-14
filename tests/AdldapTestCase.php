@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Adldap\Laravel\Facades\Adldap;
 use Adldap\Models\Computer;
 use Adldap\Models\User;
 use Adldap\Query\Builder;
@@ -24,6 +25,7 @@ class AdldapTestCase extends TestCase
         $this->mockedBuilder = $this->mock(Builder::class);
         $this->mockedBuilder->shouldReceive('getSchema')->andReturn(new ActiveDirectory);
         $this->mockedSearch = $this->mock(\Adldap\Search\Factory::class);
+        Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
     }
 
     public function make_fake_user($attributes = [])
