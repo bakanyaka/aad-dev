@@ -16,7 +16,6 @@ class AdComputerRepositoryTest extends AdldapTestCase
         $computer = $adComputerRepository->mapAdComputerToComputer($adComputer);
         $this->assertEquals($adComputer->getName(), $computer->name);
         $this->assertEquals($user->samaccountname[0], $computer->lastLoggedOnUserAccount);
-
     }
 
 }

@@ -52,7 +52,11 @@ class SearchService
     public function findUserByComputer($computerName)
     {
         $computer = $this->computers->getByName($computerName);
-        $lastLoggedOnUser = $computer->lastLoggedOnUser();
+        $lastLoggedOnUserAccount = $computer->lastLoggedOnUserAccount;
+        if (!$lastLoggedOnUserAccount) {
+            return collect();
+        }
+        $lastLoggedOnUser = $this->users->getByAccount($lastLoggedOnUserAccount);
         return ($lastLoggedOnUser) ? collect([$lastLoggedOnUser]) : collect();
     }
 }

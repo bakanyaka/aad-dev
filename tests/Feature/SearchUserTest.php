@@ -57,7 +57,7 @@ class SearchUserTest extends AdldapTestCase
         $computer = $this->make_fake_computer(["description" => "{$user->samaccountname[0]} @ {$this->faker->dateTimeThisYear()->format('d.m.Y H:i:s')}" ]);
         Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
         $this->mockedSearch->shouldReceive("computers->find")->with($computer->getName())->andReturn($computer);
-        $this->mockedSearch->shouldReceive("users->findBy")->once()->with('samaccountname', $user->samaccountname[0]);
+        $this->mockedSearch->shouldReceive("users->findBy")->once()->with('samaccountname', $user->samaccountname[0])->andReturn($user);
         $response = $this->get("/api/users/search?q={$computer->getName()}");
         $response->assertStatus(200)->assertJsonFragment(['account' => $user->samaccountname[0]]);
     }
