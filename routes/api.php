@@ -18,5 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'users'], function (){
-    Route::get('/search', 'Api\Users\UserSearchController@index');
+    Route::get('/search', 'Api\Users\UserController@index');
 });
+
+Route::group(['prefix' => 'computers'], function (){
+    Route::get('/{computer}', 'Api\Computers\ComputerController@show');
+});
+
+
+

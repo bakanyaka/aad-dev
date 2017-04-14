@@ -59,4 +59,9 @@ class SearchService
         $lastLoggedOnUser = $this->users->getByAccount($lastLoggedOnUserAccount);
         return ($lastLoggedOnUser) ? collect([$lastLoggedOnUser]) : collect();
     }
+
+    public function findComputer($computerName)
+    {
+        return $this->computers->getByName($computerName);
+    }
 }
