@@ -4,7 +4,8 @@ import {routes} from '../app/index'
 Vue.use(Router);
 
 const router = new Router({
-    routes: routes
+    routes: routes,
+    linkActiveClass: 'active'
 });
 
 export default router

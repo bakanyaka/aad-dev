@@ -14,7 +14,7 @@
     </head>
     <body>
         <div id="app">
-            <app></app>
+            <router-view></router-view>
         </div>
         <script>
             window.Laravel = {!! json_encode([

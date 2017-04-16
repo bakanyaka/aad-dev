@@ -21,11 +21,11 @@
                     </div>
                 </li>
 
-                <router-link tag="li" activeClass="active" :to="{name: 'home'}" exact>
+                <router-link tag="li" :to="{name: 'home'}" exact>
                     <a><i class="fa fa-th-large"></i> <span class="nav-label">Главная</span></a>
                 </router-link>
 
-                <router-link tag="li" activeClass="active" :to="{name: 'users'}">
+                <router-link tag="li" :to="{name: 'users'}">
                     <a><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span></a>
                 </router-link>
 
