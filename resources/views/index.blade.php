@@ -9,7 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="{{mix('/css/app.css')}}">
+        <link rel="stylesheet" href="{!! mix('/css/vendor.css') !!}">
+        <link rel="stylesheet" href="{!! mix('/css/app.css') !!}">
     </head>
     <body>
         <div id="app">
@@ -20,6 +21,6 @@
                 'csrfToken' => csrf_token(),
             ]) !!};
         </script>
-        <script src="{{mix('/js/app.js')}}"></script>
+        <script src="{!! mix('/js/app.js') !!}"></script>
     </body>
 </html>

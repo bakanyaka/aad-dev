@@ -16,7 +16,10 @@ require('./bootstrap');
  */
 
 Vue.component('app', require('./components/App.vue'));
+Vue.component('navbar-top', require('./components/NavbarTop.vue'));
 Vue.component('navigation', require('./components/Navigation.vue'));
+Vue.component('app-footer', require('./components/Footer.vue'));
+
 
 const app = new Vue({
     el: '#app',
