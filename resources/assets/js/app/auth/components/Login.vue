@@ -12,12 +12,12 @@
                     Добро пожаловать в инструментальную панель администратора ОАО МЗ Арсенал
                 </p>
                 <p>Авторизуйтесь, чтобы приступить к работе</p>
-                <form class="m-t" role="form" method="post" action="">
+                <form class="m-t" role="form" method="post" @submit.prevent="submit">
                     <div class="form-group">
-                        <input id="username" name="username" type="text" class="form-control" placeholder="Имя пользователя" required>
+                        <input id="username" name="username" type="text" class="form-control" placeholder="Имя пользователя" required autofocus v-model="username">
                     </div>
                     <div class="form-group">
-                        <input id="password"  name="password" type="password" class="form-control" placeholder="Пароль" required>
+                        <input id="password"  name="password" type="password" class="form-control" placeholder="Пароль" required v-model="password">
                     </div>
                     <button type="submit" class="btn btn-primary block full-width m-b">Войти</button>
                 </form>
@@ -33,3 +33,26 @@
     </div>
 
 </template>
+
+<script>
+    import { mapActions } from 'vuex'
+
+    export default {
+        data () {
+            return {
+                username: null,
+                password: null,
+                errors: []
+            }
+        },
+        methods: {
+            ...mapActions({
+                login: 'auth/login'
+            }),
+            submit () {
+                console.log(this.username, this.password)
+            }
+        }
+    }
+
+</script>
