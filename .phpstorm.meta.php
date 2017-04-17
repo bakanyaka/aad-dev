@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-04-05.
+    * Generated on 2017-04-17.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -41,9 +41,12 @@ namespace PHPSTORM_META {
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'adldap' instanceof \Adldap\Adldap,
             'Adldap\AdldapInterface' instanceof \Adldap\Adldap,
+            'laravel-fractal' instanceof \Spatie\Fractal\Fractal,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
+            'App\Repositories\UserRepositoryInterface' instanceof \App\Repositories\Ad\AdUserRepository,
+            'App\Repositories\ComputerRepositoryInterface' instanceof \App\Repositories\Ad\AdComputerRepository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'cache' instanceof \Illuminate\Cache\CacheManager,
             'cache.store' instanceof \Illuminate\Cache\Repository,
@@ -163,9 +166,12 @@ namespace PHPSTORM_META {
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'adldap' instanceof \Adldap\Adldap,
             'Adldap\AdldapInterface' instanceof \Adldap\Adldap,
+            'laravel-fractal' instanceof \Spatie\Fractal\Fractal,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
+            'App\Repositories\UserRepositoryInterface' instanceof \App\Repositories\Ad\AdUserRepository,
+            'App\Repositories\ComputerRepositoryInterface' instanceof \App\Repositories\Ad\AdComputerRepository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'cache' instanceof \Illuminate\Cache\CacheManager,
             'cache.store' instanceof \Illuminate\Cache\Repository,
@@ -285,9 +291,12 @@ namespace PHPSTORM_META {
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'adldap' instanceof \Adldap\Adldap,
             'Adldap\AdldapInterface' instanceof \Adldap\Adldap,
+            'laravel-fractal' instanceof \Spatie\Fractal\Fractal,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
+            'App\Repositories\UserRepositoryInterface' instanceof \App\Repositories\Ad\AdUserRepository,
+            'App\Repositories\ComputerRepositoryInterface' instanceof \App\Repositories\Ad\AdComputerRepository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'cache' instanceof \Illuminate\Cache\CacheManager,
             'cache.store' instanceof \Illuminate\Cache\Repository,
@@ -407,9 +416,12 @@ namespace PHPSTORM_META {
             'view.engine.resolver' instanceof \Illuminate\View\Engines\EngineResolver,
             'adldap' instanceof \Adldap\Adldap,
             'Adldap\AdldapInterface' instanceof \Adldap\Adldap,
+            'laravel-fractal' instanceof \Spatie\Fractal\Fractal,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
+            'App\Repositories\UserRepositoryInterface' instanceof \App\Repositories\Ad\AdUserRepository,
+            'App\Repositories\ComputerRepositoryInterface' instanceof \App\Repositories\Ad\AdComputerRepository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'cache' instanceof \Illuminate\Cache\CacheManager,
             'cache.store' instanceof \Illuminate\Cache\Repository,
