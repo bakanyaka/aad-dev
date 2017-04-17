@@ -27,6 +27,7 @@ class UserAuthTest extends TestCase
     {
         $response = $this->json('POST', '/api/login', ['username' => 'invaliduser', 'password' => 'secret']);
         $response->assertStatus(401);
+        dd($response);
         $response->assertJsonStructure(['errors' => ['root']]);
     }
 

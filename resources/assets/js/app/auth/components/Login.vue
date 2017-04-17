@@ -21,10 +21,13 @@
                     </div>
                     <button type="submit" class="btn btn-primary block full-width m-b">Войти</button>
                 </form>
+                <div class="alert alert-danger alert-dismissible" v-if="errors.root">
+                    {{ errors.root }}
+                </div>
                 <p class="m-t">
                     <small>
-                        Frontend by <a href="https://wrapbootstrap.com/theme/inspinia-responsive-admin-theme-WB0R5L90S">Inspinia WebApp</a><br>
-                        Powered by <a href="https://laravel.com/">Laravel Framework</a><br>
+                        Frontend Theme by <a href="https://wrapbootstrap.com/theme/inspinia-responsive-admin-theme-WB0R5L90S">Inspinia WebApp</a><br>
+                        Backend Powered by <a href="https://laravel.com/">Laravel Framework</a><br>
                         &copy; Dmitriy Belyakov 2016
                     </small>
                 </p>
@@ -42,7 +45,7 @@
             return {
                 username: null,
                 password: null,
-                errors: []
+                errors: [],
             }
         },
         methods: {
@@ -50,7 +53,13 @@
                 login: 'auth/login'
             }),
             submit () {
-                console.log(this.username, this.password)
+                this.login({
+                    payload: {
+                        username: this.username,
+                        password: this.password
+                    },
+                    context: this
+                })
             }
         }
     }
