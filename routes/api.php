@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', 'Auth\AuthController@login');
+Route::post('/logout', 'Auth\AuthController@logout');
 
 Route::group(['prefix' => 'users'], function (){
     Route::get('/search', 'Api\Users\UserSearchController@index');
