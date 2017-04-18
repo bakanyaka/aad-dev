@@ -1,3 +1,5 @@
-/**
- * Created by Baka on 16.04.2017.
- */
+import localforage from 'localforage'
+
+export const setToken = (state, token) => {
+    localforage.setItem('authtoken', token)
+};
