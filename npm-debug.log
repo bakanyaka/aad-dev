@@ -1,0 +1,37 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'Y:\\Web\\bin\\nodejs\\node.exe',
+1 verbose cli   'Y:\\Web\\bin\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'watch' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.5
+4 verbose run-script [ 'prewatch', 'watch', 'postwatch' ]
+5 info lifecycle @~prewatch: @
+6 silly lifecycle @~prewatch: no script for prewatch, continuing
+7 info lifecycle @~watch: @
+8 verbose lifecycle @~watch: unsafe-perm in lifecycle true
+9 verbose lifecycle @~watch: PATH: Y:\Web\bin\nodejs\node_modules\npm\bin\node-gyp-bin;Y:\Web\www\aad-dev\node_modules\.bin;C:\Users\Baka\AppData\Local\Yarn\config\global\node_modules\.bin;C:\Users\Baka\AppData\Roaming\npm;C:\Users\Baka\AppData\Roaming\Composer\vendor\bin;Y:\Web\bin\mysql\mariadb-10.2.3-win32\bin;Y:\Web\bin\php\php-7.1.1-Win32-VC14-x86;Y:\Web\bin\composer;Y:\Web\bin\redis\redis-x64-3.2.100;Y:\Web\bin\memcached\memcached-1.4.5;Y:\Web\bin\nodejs;Y:\Web\bin\yarn\bin;Y:\Web\bin\nginx\nginx-1.10.1;Y:\Web\bin\notepad++;Y:\Web\bin\telnet;Y:\Web\bin\ngrok;Y:\Web\bin\sendmail;Y:\Web\bin\winscp;Y:\Web\bin\git\bin;Y:\Web\bin\git\cmd;Y:\Web\bin\git\usr\bin;Y:\Web\bin\git\mingw32\bin;Y:\Web\bin;Y:\Web\usr\bin;Y:\Web\bin\putty;;Y:\Web\bin\cmder\bin;C:\Python35\Scripts\;C:\Python35\;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Google\Chrome\Application;C:\ProgramData\Oracle\Java\javapath;C:\RailsInstaller\Git\cmd;C:\RailsInstaller\Ruby2.1.0\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\Program Files (x86)\Git\cmd;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Users\Baka\AppData\Roaming\npm;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Baka\AppData\Roaming\npm;C:\Program Files (x86)\Git\usr\bin;C:\Program Files (x86)\Git\usr\share\vim\vim74;Y:\Web\bin\cmder\;
+10 verbose lifecycle @~watch: CWD: Y:\Web\www\aad-dev
+11 silly lifecycle @~watch: Args: [ '/d /s /c',
+11 silly lifecycle   'cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js' ]
+12 verbose stack Error: kill ENOSYS
+12 verbose stack     at exports._errnoException (util.js:1022:11)
+12 verbose stack     at process.kill (internal/process.js:172:13)
+12 verbose stack     at process.listener (Y:\Web\bin\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
+12 verbose stack     at emitNone (events.js:91:20)
+12 verbose stack     at process.emit (events.js:185:7)
+12 verbose stack     at processEmit (Y:\Web\bin\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at processEmit (Y:\Web\bin\nodejs\node_modules\npm\node_modules\npm-registry-client\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:199:44)
+13 verbose cwd Y:\Web\www\aad-dev
+14 error Windows_NT 6.1.7601
+15 error argv "Y:\\Web\\bin\\nodejs\\node.exe" "Y:\\Web\\bin\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "watch"
+16 error node v6.9.5
+17 error npm  v3.10.10
+18 error code ENOSYS
+19 error errno ENOSYS
+20 error syscall kill
+21 error kill ENOSYS
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]
