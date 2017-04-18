@@ -241,6 +241,7 @@ return [
 
         'email' => 'userprincipalname',
         'name' => 'cn',
+        'username' => 'samaccountname'
 
     ],
 

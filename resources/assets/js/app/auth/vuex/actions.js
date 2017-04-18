@@ -1,3 +1,5 @@
+import {setHttpToken} from "../../../helpers/index";
+
 export const login = ({dispatch}, {payload, context}) => {
     return axios.post('/api/login', payload).then((response) => {
         dispatch('setToken', response.data.meta.token).then(() => {
@@ -10,4 +12,5 @@ export const login = ({dispatch}, {payload, context}) => {
 
 export const setToken = ({commit, dispatch}, token) => {
     commit('setToken', token);
+    setHttpToken(token)
 };
