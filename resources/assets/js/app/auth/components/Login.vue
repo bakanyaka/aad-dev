@@ -61,6 +61,8 @@
                     context: this
                 }).then( () => {
                     this.$router.replace({name: 'home'})
+                },() => {
+                    console.log('Error. Could not log in')
                 })
             }
         }
