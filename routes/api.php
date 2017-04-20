@@ -23,7 +23,7 @@ Route::post('/logout', 'Auth\AuthController@logout');
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/me', 'Auth\AuthController@user');
-    Route::post('/logout', 'Auth\AuthController@logout');
+    Route::get('/logout', 'Auth\AuthController@logout');
 });
 
 

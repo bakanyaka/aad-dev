@@ -14,10 +14,12 @@
                 <p>Авторизуйтесь, чтобы приступить к работе</p>
                 <form class="m-t" role="form" method="post" @submit.prevent="submit">
                     <div class="form-group">
-                        <input id="username" name="username" type="text" class="form-control" placeholder="Имя пользователя" required autofocus v-model="username">
+                        <input id="username" name="username" type="text" class="form-control"
+                               placeholder="Имя пользователя" required autofocus v-model="username">
                     </div>
                     <div class="form-group">
-                        <input id="password"  name="password" type="password" class="form-control" placeholder="Пароль" required v-model="password">
+                        <input id="password" name="password" type="password" class="form-control" placeholder="Пароль"
+                               required v-model="password">
                     </div>
                     <button type="submit" class="btn btn-primary block full-width m-b">Войти</button>
                 </form>
@@ -26,7 +28,8 @@
                 </div>
                 <p class="m-t">
                     <small>
-                        Frontend Theme by <a href="https://wrapbootstrap.com/theme/inspinia-responsive-admin-theme-WB0R5L90S">Inspinia WebApp</a><br>
+                        Frontend Theme by <a
+                            href="https://wrapbootstrap.com/theme/inspinia-responsive-admin-theme-WB0R5L90S">Inspinia WebApp</a><br>
                         Backend Powered by <a href="https://laravel.com/">Laravel Framework</a><br>
                         &copy; Dmitriy Belyakov 2016
                     </small>
@@ -38,7 +41,9 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import {mapActions} from 'vuex'
+    import localforage from 'localforage'
+    import {isEmpty} from "lodash";
 
     export default {
         data () {
@@ -59,9 +64,16 @@
                         password: this.password
                     },
                     context: this
-                }).then( () => {
-                    this.$router.replace({name: 'home'})
-                },() => {
+                }).then(() => {
+                    localforage.getItem('intended').then((name) => {
+                        if (isEmpty(name)) {
+                            this.$router.replace({name: 'home'});
+                            return
+                        }
+                        this.$router.replace({name});
+                        localforage.removeItem('intended')
+                    })
+                }, () => {
                     console.log('Error. Could not log in')
                 })
             }

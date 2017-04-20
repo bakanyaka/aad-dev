@@ -9,9 +9,9 @@
                     </div>
                 </form>
             </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <a href="/logout">
+            <ul class="nav navbar-top-links navbar-right ">
+                <li v-if="user.authenticated">
+                    <a href="#" @click.prevent="signout">
                         <i class="fa fa-sign-out"></i> Выход
                     </a>
                 </li>
@@ -19,3 +19,23 @@
         </nav>
     </div>
 </template>
+<script>
+    import {mapGetters, mapActions} from 'vuex'
+
+    export default {
+        computed: mapGetters({
+            user:'auth/user'
+        }),
+        methods: {
+            ...mapActions({
+                logout: 'auth/logout'
+            }),
+            signout() {
+                this.logout().then(() => {
+                    this.$router.replace({name: 'login'})
+                })
+            }
+        }
+    }
+
+</script>
