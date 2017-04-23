@@ -18,7 +18,7 @@
                 <div class="col-sm-8">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2014</span>
+                            <span class="text-muted small pull-right">Обновлено: <i class="fa fa-clock-o"></i> {{updatedAt}}</span>
                             <h2>Поиск</h2>
                             <p>
                                 Введите данные пользователя которого хотите найти
@@ -30,7 +30,7 @@
                                 </span>
                             </div>
                             <div class="table-responsive m-t-lg animated fadeIn">
-                                <table class="table table-striped table-condensed ad-user-table">
+                                <table class="table table-hover table-condensed ad-user-table">
                                     <thead>
                                     <tr>
                                         <th>Cтатус</th>
@@ -42,7 +42,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <ad-user v-for="user in users" :user="user"></ad-user>
+                                    <user v-for="user in users" :user="user"></user>
                                     </tbody>
                                 </table>
                             </div>
@@ -50,27 +50,44 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="ibox ">
-
-                        <div class="ibox-content">
-                        </div>
-                    </div>
+                    <user-details></user-details>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-    import AdUser from './User.vue'
-    import {mapGetters} from "vuex";
+    import moment from 'moment'
+    import User from './User.vue'
+    import UserDetails from './UserDetails.vue'
+    import {mapActions, mapGetters} from "vuex";
     export default {
+        data() {
+            return {
+                updatedAt: 'Никогда'
+            }
+        },
         computed: {
             ...mapGetters({
                 users: 'users/allUsers'
             })
         },
+        methods: {
+            ...mapActions({
+                fetchUsers: 'users/fetchUsers'
+            }),
+            updateUsers() {
+                this.fetchUsers().then(() => {
+                    this.updatedAt = moment().format('llll')
+                })
+            }
+        },
         components: {
-            AdUser
+            User,
+            UserDetails
+        },
+        mounted() {
+            this.updateUsers()
         }
     }
 </script>

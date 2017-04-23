@@ -7,8 +7,9 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold">ФИО</strong>
-                            </span> <span class="text-muted text-xs block">username <b class="caret"></b></span>
+                                <strong class="font-bold" v-if="user.data">{{user.data.name}}</strong>
+                            </span>
+                            <span class="text-muted text-xs block" v-if="user.data">{{user.data.username}}<b class="caret"></b></span>
                         </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -38,8 +39,9 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    computed: mapGetters({
-        user: 'auth/user'
-    })
-
+    export default {
+        computed: mapGetters({
+            user: 'auth/user'
+        })
+    }
 </script>

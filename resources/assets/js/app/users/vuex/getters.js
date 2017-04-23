@@ -1,4 +1,11 @@
 export const allUsers = (state) => {
-    console.log("getting");
     return state.users
+};
+
+export const userDetails = (state) => {
+    return state.userDetails
+};
+
+export const loadingUserDetails = (state) => {
+    return state.loadingUserDetails
 };
