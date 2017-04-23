@@ -4,9 +4,9 @@ import localforage from "localforage";
 
 export const login = ({dispatch}, {payload, context}) => {
     return axios.post('/api/login', payload).then((response) => {
-        dispatch('setToken', response.data.meta.token).then(() => {
-            dispatch('fetchUser')
-        })
+        dispatch('setToken', response.data.meta.token)
+    }).then(() => {
+        dispatch('fetchUser')
     }).catch((error) => {
         context.errors = error.response.data.errors;
         throw error
