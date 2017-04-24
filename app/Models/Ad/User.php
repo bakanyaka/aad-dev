@@ -20,5 +20,6 @@ class User
     public $externalMail;
     public $office;
     public $department;
+    public $lastLogon;
     public $enabled;
 }

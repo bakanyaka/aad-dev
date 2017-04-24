@@ -30,6 +30,8 @@ class UserTransformer extends TransformerAbstract
             'office' => $user->office,
             'mail' => $user->mail,
             'externalMail' => $user->externalMail,
+            'lastLogonTimestamp' => $user->lastLogon->timestamp,
+            'lastLogonHuman' => $user->lastLogon->diffForHumans(),
             'enabled' => $user->enabled
         ];
     }

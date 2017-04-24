@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Ad\User;
+use App\Repositories\Ad\AdComputerRepository;
 use App\Repositories\Ad\AdUserRepository;
 use App\Services\SearchService;
 use Illuminate\Support\Collection;
@@ -15,11 +16,13 @@ class SearchServiceTest extends TestCase
      */
     protected $searchService;
     protected $fakeUserRepository;
+    protected $fakeComputerRepository;
 
     public function setUp()
     {
         $this->fakeUserRepository = $this->mock(AdUserRepository::class);
-        $this->searchService = new SearchService($this->fakeUserRepository);
+        $this->fakeComputerRepository = $this->mock(AdComputerRepository::class);
+        $this->searchService = new SearchService($this->fakeUserRepository, $this->fakeComputerRepository);
     }
 
     /** @test */

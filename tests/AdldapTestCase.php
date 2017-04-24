@@ -26,6 +26,7 @@ class AdldapTestCase extends TestCase
         $this->mockedBuilder->shouldReceive('getSchema')->andReturn(new ActiveDirectory);
         $this->mockedSearch = $this->mock(\Adldap\Search\Factory::class);
         Adldap::shouldReceive('search')->andReturn($this->mockedSearch);
+        Adldap::shouldReceive('getSchema')->andReturn(new ActiveDirectory);
     }
 
     public function make_fake_user($attributes = [])
@@ -34,7 +35,7 @@ class AdldapTestCase extends TestCase
         $lastName = $this->faker->lastName('male');
         $middleName = $this->faker->middleNameMale;
         $account = $this->faker->bothify('???#####');
-        $user = (new User([], $this->mockedBuilder))->setRawAttributes([
+        $user = (new User([], $this->mockedBuilder))->setRawAttributes(array_merge([
             'name' => ["{$lastName} {$firstName} {$middleName}"],
             'givenname' => [$firstName],
             'middlename' => [$middleName],
@@ -49,16 +50,16 @@ class AdldapTestCase extends TestCase
             'department' => ["{$this->faker->randomNumber($nbDigits = 3)} {$this->faker->sentence($nbWords = 6, $variableNbWords = true)}"],
             'title' => [$this->faker->jobTitle],
             'physicaldeliveryofficename' => [$this->faker->numerify('Здание ##, Этаж #, Комната ###')],
-            'lastLogon' => [Utilities::convertUnixTimeToWindowsTime($this->faker->unixTime())],
+            'lastlogon' => [convertUnixTimeToWindowsTime($this->faker->unixTime())],
             'useraccountcontrol' => [512]
-        ]);
+        ], $attributes));
         return $user;
     }
 
     public function make_fake_users($count = 1)
     {
         $users = array();
-        for ($i = 0; $i <= $count; $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $users[] = $this->make_fake_user();
         }
         return $users;

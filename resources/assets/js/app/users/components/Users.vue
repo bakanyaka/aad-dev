@@ -23,13 +23,12 @@
                             <p>
                                 Введите данные пользователя которого хотите найти
                             </p>
-                            <div class="input-group">
-                                <input type="text" placeholder="Search client " class="input form-control" v-model="searchText">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn btn-primary" @click="search"> <i class="fa fa-search"></i> Найти</button>
-                                </span>
-                            </div>
-                            <div class="table-responsive m-t-lg animated fadeIn" v-if="users.length">
+                            <input type="text" placeholder="Введите имя пользователя, учетную запись, телефон или имя компьютера" class="input form-control" v-model="searchText">
+                        </div>
+                    </div>
+                    <div class="ibox animated fadeIn" v-if="users.length">
+                        <div class="ibox-content">
+                            <div class="table-responsive m-t-lg">
                                 <table class="table table-hover table-condensed ad-user-table">
                                     <thead>
                                     <tr>

@@ -11,10 +11,11 @@ class SearchUserTest extends AdldapTestCase
     public function it_fetches_all_users() {
         $users = $this->make_fake_users(1200);
         $this->disableExceptionHandling();
-        $this->mockedSearch->shouldReceive('users')->once()->andReturn($this->mockedBuilder);
+        $this->mockedSearch->shouldReceive('where')->once()->andReturn($this->mockedBuilder);
         $this->mockedBuilder->shouldReceive('paginate->getResults')->once()->andReturn(collect($users));
         $response = $this->get("/api/users/");
         $response->assertStatus(200);
+        $this->assertCount(1200, $response->decodeResponseJson()['data']);
     }
 
     /** @test */

@@ -56,7 +56,7 @@ class UserAuthTest extends TestCase
     public function user_cant_access_protected_page_after_logging_out()
     {
         list(, $token) = $this->createUserAndLogin();
-        $response = $this->postJson('/api/logout',[],['Authorization' => "Bearer {$token}"]);
+        $response = $this->get('/api/logout',['Authorization' => "Bearer {$token}"]);
         $response->assertStatus(200);
         $response = $this->getJson('/api/me', ['Authorization' => "Bearer {$token}"]);
         $response->assertStatus(401);

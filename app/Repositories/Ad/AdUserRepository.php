@@ -7,9 +7,18 @@ namespace App\Repositories\Ad;
 use Adldap\Laravel\Facades\Adldap;
 use App\Models\Ad\User;
 use App\Repositories\UserRepositoryInterface;
+use Carbon\Carbon;
 
 class AdUserRepository implements UserRepositoryInterface
 {
+    public function getAll()
+    {
+        $adUsers = Adldap::search()->where([
+            Adldap::getSchema()->objectClass() => Adldap::getSchema()->objectClassUser(),
+            Adldap::getSchema()->objectCategory() => Adldap::getSchema()->objectCategoryPerson(),
+        ])->paginate()->getResults();
+        return collect($adUsers)->map([$this, 'mapAdUserToUser']);
+    }
 
     public function getByAccount($account)
     {
@@ -46,15 +55,8 @@ class AdUserRepository implements UserRepositoryInterface
         $user->office = $adUser->getPhysicalDeliveryOfficeName();
         $user->department = $adUser->getDepartment();
         $user->enabled = $adUser->isEnabled();
+        $user->lastLogon = Carbon::createFromTimestamp(convertWindowsTimeToUnixTime($adUser->getLastLogon()));
         return $user;
     }
 
-    public function getAll()
-    {
-        $adUsers = Adldap::search()->where([
-            Adldap::getSchema()->objectClass() => Adldap::getSchema()->objectClassUser(),
-            Adldap::getSchema()->objectCategory() => Adldap::getSchema()->objectCategoryPerson(),
-        ])->paginate()->getResults();
-        return collect($adUsers)->map([$this, 'mapAdUserToUser']);
-    }
 }
