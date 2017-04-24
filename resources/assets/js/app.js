@@ -16,6 +16,12 @@ localforage.config({
 
 require('./bootstrap');
 
+
+if (typeof NODE_ENV === 'undefined' || NODE_ENV === "production") {
+    require('./dev')
+}
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

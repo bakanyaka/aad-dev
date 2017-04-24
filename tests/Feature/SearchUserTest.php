@@ -15,6 +15,7 @@ class SearchUserTest extends AdldapTestCase
         $this->mockedSearch->shouldReceive('users')->once()->andReturn($this->mockedBuilder);
         $this->mockedBuilder->shouldReceive('findBy')->once()->with('samaccountname', $user->samaccountname[0])->andReturn($user);
         $response = $this->get("/api/users/search?q={$user->samaccountname[0]}");
+        dd($response->decodeResponseJson());
         $response->assertStatus(200)->assertJsonFragment([
             'account' => $user->samaccountname[0],
             'name' => $user->getName(),

@@ -4,7 +4,7 @@
         <td>{{user.name}}</td>
         <td>{{user.mail}}</td>
         <td>{{user.title}}</td>
-        <td>{{user.localPhone}}</td>
+        <td>{{phoneNumber}}</td>
         <td>{{user.department}}</td>
     </tr>
 </template>
@@ -12,6 +12,21 @@
     import {mapActions, mapGetters} from "vuex";
     export default {
         props: ['user'],
+        computed: {
+            phoneNumber() {
+                const phones = [];
+                if (this.user.localPhone !== null) {
+                    phones.push(this.user.localPhone)
+                }
+                if (this.user.cityPhone !== null) {
+                    phones.push(this.user.cityPhone)
+                }
+                if (this.user.mobilePhone !== null) {
+                    phones.push(this.user.mobilePhone)
+                }
+                return phones.join(', ');
+            }
+        },
         methods: {
             ...mapActions({
                 fetchUserDetails: 'users/fetchUserDetails'

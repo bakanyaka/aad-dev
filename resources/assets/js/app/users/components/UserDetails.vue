@@ -73,8 +73,3 @@
         }
     }
 </script>
-<style>
-    .loading-user-details {
-        min-height: 100px;
-    }
-</style>

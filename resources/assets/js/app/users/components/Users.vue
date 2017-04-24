@@ -24,12 +24,12 @@
                                 Введите данные пользователя которого хотите найти
                             </p>
                             <div class="input-group">
-                                <input type="text" placeholder="Search client " class="input form-control">
+                                <input type="text" placeholder="Search client " class="input form-control" v-model="searchText">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Найти</button>
+                                    <button type="button" class="btn btn btn-primary" @click="search"> <i class="fa fa-search"></i> Найти</button>
                                 </span>
                             </div>
-                            <div class="table-responsive m-t-lg animated fadeIn">
+                            <div class="table-responsive m-t-lg animated fadeIn" v-if="users.length">
                                 <table class="table table-hover table-condensed ad-user-table">
                                     <thead>
                                     <tr>
@@ -60,22 +60,36 @@
     import moment from 'moment'
     import User from './User.vue'
     import UserDetails from './UserDetails.vue'
-    import {mapActions, mapGetters} from "vuex";
+    import {mapActions, mapGetters} from 'vuex';
+    import {debounce} from 'lodash'
     export default {
         data() {
             return {
-                updatedAt: 'Никогда'
+                updatedAt: 'Никогда',
+                searchText: ''
             }
+        },
+        watch: {
+            searchText: _.debounce(function () {
+                this.search();
+            }, 200)
         },
         computed: {
             ...mapGetters({
-                users: 'users/allUsers'
-            })
+                users: 'users/filteredUsers'
+            }),
         },
         methods: {
             ...mapActions({
-                fetchUsers: 'users/fetchUsers'
+                fetchUsers: 'users/fetchUsers',
+                filterUsers: 'users/filterUsers'
             }),
+            search() {
+                if (this.searchText.trim().length < 3) {
+                    return
+                }
+                this.filterUsers(this.searchText.trim())
+            },
             updateUsers() {
                 this.fetchUsers().then(() => {
                     this.updatedAt = moment().format('llll')
