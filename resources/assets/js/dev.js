@@ -31,7 +31,7 @@ function makeFakeUser() {
     }
 }
 
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 500; i++) {
     users.push(makeFakeUser())
 }
 mock.onGet('/api/users').reply(200, {

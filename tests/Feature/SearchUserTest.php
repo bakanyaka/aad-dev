@@ -8,6 +8,16 @@ use Tests\AdldapTestCase;
 class SearchUserTest extends AdldapTestCase
 {
     /** @test */
+    public function it_fetches_all_users() {
+        $users = $this->make_fake_users(1200);
+        $this->disableExceptionHandling();
+        $this->mockedSearch->shouldReceive('users')->once()->andReturn($this->mockedBuilder);
+        $this->mockedBuilder->shouldReceive('paginate->getResults')->once()->andReturn(collect($users));
+        $response = $this->get("/api/users/");
+        $response->assertStatus(200);
+    }
+
+    /** @test */
     public function it_finds_user_by_username_and_returns_json()
     {
         $this->disableExceptionHandling();
@@ -15,7 +25,6 @@ class SearchUserTest extends AdldapTestCase
         $this->mockedSearch->shouldReceive('users')->once()->andReturn($this->mockedBuilder);
         $this->mockedBuilder->shouldReceive('findBy')->once()->with('samaccountname', $user->samaccountname[0])->andReturn($user);
         $response = $this->get("/api/users/search?q={$user->samaccountname[0]}");
-        dd($response->decodeResponseJson());
         $response->assertStatus(200)->assertJsonFragment([
             'account' => $user->samaccountname[0],
             'name' => $user->getName(),

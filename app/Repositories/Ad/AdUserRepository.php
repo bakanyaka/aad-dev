@@ -48,4 +48,13 @@ class AdUserRepository implements UserRepositoryInterface
         $user->enabled = $adUser->isEnabled();
         return $user;
     }
+
+    public function getAll()
+    {
+        $adUsers = Adldap::search()->where([
+            Adldap::getSchema()->objectClass() => Adldap::getSchema()->objectClassUser(),
+            Adldap::getSchema()->objectCategory() => Adldap::getSchema()->objectCategoryPerson(),
+        ])->paginate()->getResults();
+        return collect($adUsers)->map([$this, 'mapAdUserToUser']);
+    }
 }
