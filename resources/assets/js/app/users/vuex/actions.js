@@ -5,7 +5,11 @@ export const fetchUsers = ({commit}) => {
     });
 };
 
-export const filterUsers = ({commit, state}, searchString) => {
+export const findUsers = ({commit, dispatch, state}, searchString) => {
+    let found = searchString.match(/[a-z]+\d*-\d+/i);
+    if (found) {
+        return dispatch('findUserByComputer', searchString);
+    }
     let filteredUsers = filter(state.users, (user) => {
         for (let property in user) {
             if (typeof user[property] === "string" && user[property].toLowerCase().includes(searchString.toLowerCase()) ) {
@@ -14,7 +18,13 @@ export const filterUsers = ({commit, state}, searchString) => {
         }
         return false
     });
-    commit('setFilteredUsers', sortBy(filteredUsers, ['lastName', 'firstName']));
+    commit('setFoundUsers', filteredUsers);
+};
+
+export const findUserByComputer = ({commit}, computerName) => {
+    return axios.get(`/api/users/search?q=${computerName}`).then((response) => {
+        commit('setFoundUsers', response.data.data);
+    });
 };
 
 export const fetchUserDetails = ({commit}, user) => {
@@ -24,3 +34,4 @@ export const fetchUserDetails = ({commit}, user) => {
         commit('setLoadingUserDetails', false);
     }, 500);
 };
+

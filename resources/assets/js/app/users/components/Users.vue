@@ -75,19 +75,19 @@
         },
         computed: {
             ...mapGetters({
-                users: 'users/filteredUsers'
+                users: 'users/foundUsers'
             }),
         },
         methods: {
             ...mapActions({
                 fetchUsers: 'users/fetchUsers',
-                filterUsers: 'users/filterUsers'
+                findUsers: 'users/findUsers'
             }),
             search() {
                 if (this.searchText.trim().length < 3) {
                     return
                 }
-                this.filterUsers(this.searchText.trim())
+                this.findUsers(this.searchText.trim())
             },
             updateUsers() {
                 this.fetchUsers().then(() => {

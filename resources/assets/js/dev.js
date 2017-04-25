@@ -5,8 +5,6 @@ import MockAdapter from 'axios-mock-adapter'
 
 const mock = new MockAdapter(axios);
 
-const users = [];
-
 function makeFakeUser() {
     let firstName = faker.name.firstName();
     let lastName = faker.name.lastName();
@@ -31,11 +29,20 @@ function makeFakeUser() {
     }
 }
 
-for (let i = 0; i < 500; i++) {
-    users.push(makeFakeUser())
+function makeFakeUsers($quantity) {
+    const users = [];
+    for (let i = 0; i < $quantity; i++) {
+        users.push(makeFakeUser())
+    }
+    return users;
 }
+
+
 mock.onGet('/api/users').reply(200, {
-    data: users
+    data: makeFakeUsers(1000)
+});
+mock.onGet(/\/api\/users\/search\?q=.+/i).reply(200, {
+   data: makeFakeUsers(10)
 });
 mock.onAny().passThrough();
 

@@ -1,6 +1,6 @@
 export default {
     users: [],
-    filteredUsers: [],
+    foundUsers: [],
     loadingUsers: false,
     userDetails: null,
     loadingUserDetails: false

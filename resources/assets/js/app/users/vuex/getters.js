@@ -1,9 +1,11 @@
+import {sortBy} from 'lodash'
+
 export const allUsers = (state) => {
     return state.users
 };
 
-export const filteredUsers = (state) => {
-    return state.filteredUsers
+export const foundUsers = (state) => {
+    return sortBy(state.foundUsers, ['lastName', 'firstName'])
 };
 
 
