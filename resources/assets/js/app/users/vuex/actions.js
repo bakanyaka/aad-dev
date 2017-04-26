@@ -27,11 +27,13 @@ export const findUserByComputer = ({commit}, computerName) => {
     });
 };
 
+
 export const fetchUserDetails = ({commit}, user) => {
     commit('setLoadingUserDetails', true);
-    setTimeout(() => {
+    axios.get(`/api/computers/search?username=${user.account}`).then((response) => {
+        user.computers = response.data.data;
         commit('setUserDetails', user);
         commit('setLoadingUserDetails', false);
-    }, 500);
+    });
 };
 

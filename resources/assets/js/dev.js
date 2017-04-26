@@ -37,12 +37,28 @@ function makeFakeUsers($quantity) {
     return users;
 }
 
+function makeFakeComputer() {
+    return {
+        name: faker.helpers.replaceSymbolWithNumber("otd###-########").toLowerCase()
+    }
+}
+function makeFakeComputers($quantity) {
+    const computers = [];
+    for (let i = 0; i < $quantity; i++) {
+        computers.push(makeFakeComputer())
+    }
+    return computers;
+}
+
 
 mock.onGet('/api/users').reply(200, {
     data: makeFakeUsers(1000)
 });
 mock.onGet(/\/api\/users\/search\?q=.+/i).reply(200, {
    data: makeFakeUsers(10)
+});
+mock.onGet(/\/api\/computers\/search\?username=.+/i).reply(200, {
+    data: makeFakeComputers(3)
 });
 mock.onAny().passThrough();
 

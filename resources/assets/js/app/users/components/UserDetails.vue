@@ -43,6 +43,15 @@
                             <dd>{{userDetails.mobilePhone}}</dd>
                             <dt>Подразделение</dt>
                             <dd>{{userDetails.department}}</dd>
+                            <dt>Компьютеры:</dt>
+                            <dd>
+                                <ul v-if="userDetails.computers.length">
+                                    <li v-for="computer in userDetails.computers">
+                                        {{computer.name}}
+                                    </li>
+                                </ul>
+                                <span v-else>Компьютеров не найдено</span>
+                            </dd>
                         </dl>
                     </div>
                     <div class="panel panel-primary" v-else>
