@@ -55,7 +55,12 @@ class AdUserRepository implements UserRepositoryInterface
         $user->office = $adUser->getPhysicalDeliveryOfficeName();
         $user->department = $adUser->getDepartment();
         $user->enabled = $adUser->isEnabled();
+        if ($adUser->getLastLogon()) {
         $user->lastLogon = Carbon::createFromTimestamp(convertWindowsTimeToUnixTime($adUser->getLastLogon()));
+        } else {
+            $user->lastLogon = null;
+        }
+
         return $user;
     }
 
