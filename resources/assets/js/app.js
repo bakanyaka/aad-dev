@@ -17,9 +17,9 @@ localforage.config({
 require('./bootstrap');
 
 
-if (typeof NODE_ENV === 'undefined' || NODE_ENV === "production") {
-    require('./dev')
-}
+
+//require('./dev');
+
 
 
 /**

@@ -1,6 +1,8 @@
 import {filter, sortBy} from 'lodash'
 export const fetchUsers = ({commit}) => {
+    commit('setLoadingUsers', true);
     return axios.get('/api/users').then((response) => {
+        commit('setLoadingUsers', false);
         commit('setUsers', response.data.data);
     });
 };

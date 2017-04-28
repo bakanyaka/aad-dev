@@ -1,7 +1,7 @@
 export default {
     users: [],
     foundUsers: [],
-    loadingUsers: false,
+    loadingUsers: true,
     userDetails: null,
     loadingUserDetails: false
 }
