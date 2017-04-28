@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-clipboard="http://www.w3.org/1999/xhtml">
     <div class="ibox">
         <div class="ibox-content">
             <div class="row">
@@ -24,7 +24,8 @@
                         </div>
                         <dl class="dl-horizontal">
                             <dt>Статус:</dt>
-                            <dd class="m-b"><span v-if="!userDetails.enabled" class="label label-danger">Отключен</span><span class="label label-primary" v-else>Активен</span></dd>
+                            <dd class="m-b"><span v-if="!userDetails.enabled" class="label label-danger">Отключен</span><span
+                                    class="label label-primary" v-else>Активен</span></dd>
                             <dt>Фамилия:</dt>
                             <dd>{{userDetails.lastName}}</dd>
                             <dt>Имя:</dt>
@@ -52,33 +53,66 @@
                                 </ul>
                                 <span v-else>Компьютеров не найдено</span>
                             </dd>
+                            <dt>Действия:</dt>
+                            <dd>
+                                <button class="btn btn-white" type="button" v-clipboard:copy="clipboard">
+                                    <i class="fa fa-copy text-navy"></i>
+                                </button>
+                            </dd>
                         </dl>
                     </div>
                     <div class="panel panel-primary" v-else>
                         <div class="panel-heading"><i class="fa fa-info-circle"></i> Выберите пользователя</div>
-                        <div class="panel-body">Выберите пользователя из списка для отображения подробной информации</div>
+                        <div class="panel-body">Выберите пользователя из списка для отображения подробной информации
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<!--    <div v-if="userDetails">
-        <div><span v-if="!userDetails.enabled" class="label label-danger">Отключен</span><span class="label label-primary" v-else>Активен</span></div>
-        <div>{{userDetails.name}}</div>
-        <div>{{userDetails.mail}}</div>
-        <div>{{userDetails.title}}</div>
-        <div>{{userDetails.localPhone}}</div>
-        <div>{{userDetails.department}}</div>
-    </div>-->
+    <!--    <div v-if="userDetails">
+            <div><span v-if="!userDetails.enabled" class="label label-danger">Отключен</span><span class="label label-primary" v-else>Активен</span></div>
+            <div>{{userDetails.name}}</div>
+            <div>{{userDetails.mail}}</div>
+            <div>{{userDetails.title}}</div>
+            <div>{{userDetails.localPhone}}</div>
+            <div>{{userDetails.department}}</div>
+        </div>-->
 </template>
 <script>
     import {mapActions, mapGetters} from "vuex";
+    import VueClipboard from 'vue-clipboard2';
+    import Vue from 'vue'
+
+    Vue.use(VueClipboard);
+
     export default {
         computed: {
             ...mapGetters({
                 userDetails: 'users/userDetails',
                 loadingUserDetails: 'users/loadingUserDetails'
-            })
+            }),
+            phoneNumber() {
+                const phones = [];
+                if (this.userDetails.localPhone !== null) {
+                    phones.push(this.userDetails.localPhone)
+                }
+                if (this.userDetails.cityPhone !== null) {
+                    phones.push(this.userDetails.cityPhone)
+                }
+                if (this.userDetails.mobilePhone !== null) {
+                    phones.push(this.userDetails.mobilePhone)
+                }
+                return phones.join(', ');
+            },
+            clipboard() {
+                return  `ФИО: ${this.userDetails.displayName}\n` +
+                        `Должность: ${this.userDetails.title}\n` +
+                        `Подразделение: ${this.userDetails.department}\n` +
+                        `Учетная запись: ${this.userDetails.mail}\n` +
+                        `Телефон: ${this.phoneNumber}\n` +
+                        `Компьютеры: ${this.userDetails.computers.map(computer => computer.name).join(', ')}\n`
+            }
         }
     }
 </script>

@@ -18,12 +18,17 @@
                 <div class="col-sm-8">
                     <div class="ibox">
                         <div class="ibox-content" v-bind:class="{'sk-loading': loadingUsers}">
-                            <span class="text-muted small pull-right">Обновлено: <i class="fa fa-clock-o"></i> {{updatedAt}} <button class="btn btn-white btn-sm" v-on:click="updateUsers"><i class="fa fa-refresh"></i> Обновить</button></span>
+                            <span class="text-muted small pull-right">
+                                Обновлено: <i class="fa fa-clock-o"></i> {{updatedAt}} <button
+                                    class="btn btn-white btn-sm" v-on:click="updateUsers"><i class="fa fa-refresh"></i> Обновить</button>
+                            </span>
                             <h2>Поиск</h2>
                             <p>
                                 Введите данные пользователя которого хотите найти
                             </p>
-                            <input type="text" placeholder="Введите имя пользователя, учетную запись, телефон или имя компьютера" class="input form-control" v-model="searchText">
+                            <input type="text"
+                                   placeholder="Введите имя пользователя, учетную запись, телефон или имя компьютера"
+                                   class="input form-control" v-model="searchText">
                             <div class="sk-spinner sk-spinner-wave">
                                 <div class="sk-rect1"></div>
                                 <div class="sk-rect2"></div>
