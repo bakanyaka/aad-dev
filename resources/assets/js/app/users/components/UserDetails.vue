@@ -55,7 +55,10 @@
                             </dd>
                             <dt>Действия:</dt>
                             <dd>
-                                <button class="btn btn-white" type="button" v-clipboard:copy="clipboard">
+                                <button class="btn btn-white" type="button"
+                                        v-clipboard:copy="clipboard"
+                                        v-clipboard:success="onCopy"
+                                        v-clipboard:error="onError">
                                     <i class="fa fa-copy text-navy"></i>
                                 </button>
                             </dd>
@@ -112,6 +115,14 @@
                         `Учетная запись: ${this.userDetails.mail}\n` +
                         `Телефон: ${this.phoneNumber}\n` +
                         `Компьютеры: ${this.userDetails.computers.map(computer => computer.name).join(', ')}\n`
+            }
+        },
+        methods: {
+            onCopy: function (e) {
+                alert('Данные пользователя скопированы в буфер обмена')
+            },
+            onError: function (e) {
+                alert('Ошибка копирования данных в буфер обмена')
             }
         }
     }

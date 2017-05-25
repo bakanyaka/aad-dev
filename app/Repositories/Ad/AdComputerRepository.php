@@ -33,6 +33,7 @@ class AdComputerRepository implements ComputerRepositoryInterface
 
     private function parseUserLoginData($loginDataString)
     {
+        $logons = [];
         preg_match_all('/(\w+)\s@\s(\d{2}.\d{2}.\d{4}\s\d{1,2}:\d{2}:\d{2})/', $loginDataString, $matches, PREG_SET_ORDER);
         foreach ($matches as $match) {
             $logons[] = [
