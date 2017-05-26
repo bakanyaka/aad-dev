@@ -29,10 +29,8 @@ class CheckCfgServiceTest extends TestCase
      */
     public function it_parses_all_checkcfg_files_in_specified_directory ()
     {
-
-
         $result = $this->checkCfgService->parseAll();
-        $this->assertCount(count($this->disk->allFiles()), $result);
+        $this->assertCount(count($this->disk->files()), $result);
     }
 
     /**
@@ -40,7 +38,7 @@ class CheckCfgServiceTest extends TestCase
      */
     public function it_parses_checkcfg_file_and_retrieves_correct_computer_details ()
     {
-        $result = $this->checkCfgService->parseFile();
-        $this->assertInstanceOf(\App\Models\CheckCfg\ComputerDetails, $result);
+        $result = $this->checkCfgService->parseFile('2C56DC4B2290');
+        $this->assertInstanceOf(\App\Models\Computer::class, $result);
     }
 }
