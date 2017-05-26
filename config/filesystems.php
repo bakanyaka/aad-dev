@@ -63,6 +63,16 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        'checkcfg' => [
+            'driver' => 'local',
+            'root' => 'Z:'
+        ],
+
+        'checkcfg_testing' => [
+            'driver' => 'local',
+            'root' => base_path() . '/tests/Files/CheckCfg'
+        ]
+
     ],
 
 ];
