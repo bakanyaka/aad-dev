@@ -4,6 +4,8 @@
 namespace App\Models;
 
 
+use Carbon\Carbon;
+
 class Computer
 {
 
@@ -19,6 +21,15 @@ class Computer
     protected $soft = [];
     protected $monitors = [];
     protected $printers = [];
+    protected $detailsUpdatedAt;
+
+    /**
+     * @return Carbon | null
+     */
+    public function getDetailsUpdatedAt() : ?Carbon
+    {
+        return $this->detailsUpdatedAt;
+    }
 
 
     /**
@@ -38,10 +49,11 @@ class Computer
         $this->name = $name;
     }
 
+
     /**
-     * @return string
+     * @return null|string
      */
-    public function getLastLoggedOnUserAccount() : string
+    public function getLastLoggedOnUserAccount() : ?string
     {
         return $this->lastLoggedOnUserAccount;
     }
@@ -55,9 +67,9 @@ class Computer
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getMac() : string
+    public function getMac() : ?string
     {
         return $this->mac;
     }
@@ -71,9 +83,9 @@ class Computer
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getIp() : string
+    public function getIp() : ?string
     {
         return $this->ip;
     }
@@ -87,9 +99,9 @@ class Computer
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getOs() : string
+    public function getOs() : ?string
     {
         return $this->os;
     }
@@ -103,9 +115,9 @@ class Computer
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getUserRights() : string
+    public function getUserRights() : ?string
     {
         return $this->userRights;
     }
@@ -119,9 +131,9 @@ class Computer
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getCpu() : string
+    public function getCpu() : ?string
     {
         return $this->cpu;
     }
@@ -135,19 +147,19 @@ class Computer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMemorySizeInMb() : int
+    public function getMemorySizeInMb() : ?int
     {
         return $this->memorySize;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMemorySizeInGb() : int
+    public function getMemorySizeInGb() : ?int
     {
-        return $this->memorySize / 1024;
+        return $this->memorySize ? round($this->memorySize / 1024) : null;
     }
 
     /**
@@ -159,9 +171,9 @@ class Computer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTotalHddSize() : int
+    public function getTotalHddSize() : ?int
     {
         return $this->totalHddSize;
     }
@@ -221,5 +233,10 @@ class Computer
     public function addPrinter(string $printer)
     {
         $this->printers[] = $printer;
+    }
+
+    public function setDetailsUpdatedAt(Carbon $timestamp)
+    {
+        $this->detailsUpdatedAt = $timestamp;
     }
 }
