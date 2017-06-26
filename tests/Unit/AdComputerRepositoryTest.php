@@ -14,8 +14,8 @@ class AdComputerRepositoryTest extends AdldapTestCase
         $adComputer = $this->make_fake_computer(["description" => "{$user->samaccountname[0]} @ {$this->faker->dateTimeThisYear()->format('d.m.Y H:i:s')}" ]);
         $adComputerRepository = new AdComputerRepository();
         $computer = $adComputerRepository->mapAdComputerToComputer($adComputer);
-        $this->assertEquals($adComputer->getName(), $computer->name);
-        $this->assertEquals($user->samaccountname[0], $computer->lastLoggedOnUserAccount);
+        $this->assertEquals($adComputer->getName(), $computer->getName());
+        $this->assertEquals($user->samaccountname[0], $computer->getLastLoggedOnUserAccount());
     }
 
 }

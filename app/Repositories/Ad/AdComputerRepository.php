@@ -5,7 +5,7 @@ namespace App\Repositories\Ad;
 
 
 use Adldap\Laravel\Facades\Adldap;
-use App\Models\Ad\Computer;
+use App\Models\Computer;
 use App\Repositories\ComputerRepositoryInterface;
 use Faker\Provider\DateTime;
 
@@ -25,9 +25,9 @@ class AdComputerRepository implements ComputerRepositoryInterface
     public function mapAdComputerToComputer(\Adldap\Models\Computer $adComputer)
     {
         $computer = new Computer();
-        $computer->name = $adComputer->getName();
+        $computer->setName($adComputer->getName());
         $lastLogon = $this->parseUserLoginData($adComputer->getDescription());
-        $computer->lastLoggedOnUserAccount = $lastLogon ? $lastLogon[0]['account'] : null;
+        $computer->setLastLoggedOnUserAccount($lastLogon[0]['account'] ?? null);
         return $computer;
     }
 

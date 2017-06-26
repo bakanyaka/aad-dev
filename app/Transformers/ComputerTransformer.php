@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-use App\Models\Ad\Computer;
+use App\Models\Computer;
 use League\Fractal\TransformerAbstract;
 
 class ComputerTransformer extends TransformerAbstract
@@ -16,8 +16,8 @@ class ComputerTransformer extends TransformerAbstract
     public function transform(Computer $computer)
     {
         return [
-            'name' => $computer->name,
-            'lastLoggedOnUserAccount' => $computer->lastLoggedOnUserAccount
+            'name' => $computer->getName(),
+            'lastLoggedOnUserAccount' => $computer->getLastLoggedOnUserAccount()
         ];
     }
 }
