@@ -16,9 +16,6 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         $admins = ['bds47049'];
-        if (env('APP_ENV') === 'testing') {
-            return $next($request);
-        }
         if (in_array($request->user()->username, $admins)) {
             return $next($request);
         }

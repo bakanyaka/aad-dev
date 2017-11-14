@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\IsAdmin;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -11,6 +12,12 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class UserAuthTest extends TestCase
 {
     use DatabaseTransactions;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->withoutMiddleware(isAdmin::class);
+    }
 
     /** @test */
     public function user_can_login_with_valid_credentials()
