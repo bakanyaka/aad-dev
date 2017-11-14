@@ -21,22 +21,24 @@ Route::post('/login', 'Auth\AuthController@login');
 Route::post('/logout', 'Auth\AuthController@logout');
 
 
-Route::group(['middleware' => 'jwt.auth'], function () {
+Route::group(['middleware' => ['jwt.auth', 'admin']], function () {
     Route::get('/me', 'Auth\AuthController@user');
     Route::get('/logout', 'Auth\AuthController@logout');
+
+    Route::group(['prefix' => 'users'], function (){
+        Route::get('/', 'Api\Users\UserController@index');
+        Route::get('/search', 'Api\Users\UserSearchController@index');
+    });
+
+    Route::group(['prefix' => 'computers'], function (){
+        Route::get('/search', 'Api\Computers\ComputerSearchController@index');
+        Route::get('/{computer}', 'Api\Computers\ComputerController@show');
+    });
 });
 
 
 
-Route::group(['prefix' => 'users'], function (){
-    Route::get('/', 'Api\Users\UserController@index');
-    Route::get('/search', 'Api\Users\UserSearchController@index');
-});
 
-Route::group(['prefix' => 'computers'], function (){
-    Route::get('/search', 'Api\Computers\ComputerSearchController@index');
-    Route::get('/{computer}', 'Api\Computers\ComputerController@show');
-});
 
 
 

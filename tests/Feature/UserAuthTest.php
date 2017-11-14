@@ -76,6 +76,4 @@ class UserAuthTest extends TestCase
         $token = $response->decodeResponseJson()['meta']['token'];
         return array($user, $token, $response);
     }
-
-
 }

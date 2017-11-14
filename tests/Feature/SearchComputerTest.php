@@ -2,10 +2,12 @@
 
 namespace Feature;
 use Adldap\Laravel\Facades\Adldap;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\AdldapTestCase;
 
 class SearchComputerTest extends AdldapTestCase
 {
+    use WithoutMiddleware;
     /** @test */
     public function it_fetches_computer_by_name()
     {

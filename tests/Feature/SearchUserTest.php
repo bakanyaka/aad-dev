@@ -3,10 +3,12 @@
 namespace Tests\Feature;
 
 use Adldap\Laravel\Facades\Adldap;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\AdldapTestCase;
 
 class SearchUserTest extends AdldapTestCase
 {
+    use WithoutMiddleware;
     /** @test */
     public function it_fetches_all_users() {
         $users = $this->make_fake_users(1200);
