@@ -37,7 +37,6 @@ class SearchUserTest extends AdldapTestCase
             'middleName' => $user->middlename[0],
             'title' => $user->title[0],
             'mail' => $user->mail[0],
-            'externalMail' => $user->homephone[0],
             'localPhone' => $user->telephonenumber[0],
             'cityPhone' => $user->pager[0],
             'mobilePhone' => $user->mobile[0],

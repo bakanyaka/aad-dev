@@ -29,7 +29,6 @@ class UserTransformer extends TransformerAbstract
             'department' => $user->department,
             'office' => $user->office,
             'mail' => $user->mail,
-            'externalMail' => $user->externalMail,
             'lastLogonTimestamp' => $user->lastLogon ? $user->lastLogon->timestamp : 0,
             'lastLogonHuman' => $user->lastLogon ? $user->lastLogon->diffForHumans() : 'Никогда',
             'enabled' => $user->enabled

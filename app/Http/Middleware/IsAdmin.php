@@ -15,7 +15,7 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        $admins = ['bds47049'];
+        $admins = ['bds47049','ksa47079','gpa47070','kdi47090','kvv47092','knn47999','pvk47071','maa45066','mkb47091','ino47016'];
         if (in_array($request->user()->username, $admins)) {
             return $next($request);
         }

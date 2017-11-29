@@ -46,14 +46,14 @@
                                     <tr>
                                         <th>Cтатус</th>
                                         <th>ФИО</th>
-                                        <th>E-mail</th>
+                                        <th>Учетная запись</th>
                                         <th>Должность</th>
                                         <th>Номер телефона</th>
                                         <th>Подразделение</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <user v-for="user in users" :user="user"></user>
+                                    <user v-for="user in users" :key='user.account' :user="user"></user>
                                     </tbody>
                                 </table>
                             </div>

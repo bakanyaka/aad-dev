@@ -2,7 +2,7 @@
     <tr @click="fetchUserDetails(user)">
         <td><span v-if="!user.enabled" class="label label-danger">Отключен</span><span class="label label-primary" v-else>Активен</span></td>
         <td>{{user.name}}</td>
-        <td>{{user.mail}}</td>
+        <td>{{user.account}}</td>
         <td>{{user.title}}</td>
         <td>{{phoneNumber}}</td>
         <td>{{user.department}}</td>

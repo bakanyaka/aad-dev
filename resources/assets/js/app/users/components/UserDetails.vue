@@ -32,7 +32,7 @@
                             <dd>{{userDetails.firstName}}</dd>
                             <dt>Отчество:</dt>
                             <dd>{{userDetails.middleName}}</dd>
-                            <dt>Внутренняя почта:</dt>
+                            <dt>Электронная почта:</dt>
                             <dd>{{userDetails.mail}}</dd>
                             <dt>Должность:</dt>
                             <dd>{{userDetails.title}}</dd>
@@ -43,6 +43,8 @@
                             <dt>Мобильный телефон</dt>
                             <dd>{{userDetails.mobilePhone}}</dd>
                             <dt>Подразделение</dt>
+                            <dd>{{userDetails.department}}</dd>
+                            <dt>Последняя авторизация</dt>
                             <dd>{{userDetails.department}}</dd>
                             <dt>Компьютеры:</dt>
                             <dd>
